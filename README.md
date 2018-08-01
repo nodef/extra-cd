@@ -1,11 +1,10 @@
-Change to directories with shortcut names in Linux Terminal.
+Change to directories with shortcut names.
 
 
 ## install
 
 ```bash
-# source the script in .bashrc to install
-$ echo "source <path to ocd.sh>" >> ~/.bashrc
+$ npm install -g extra-cd
 ```
 
 

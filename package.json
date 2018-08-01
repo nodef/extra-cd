@@ -1,6 +1,6 @@
 {
   "name": "extra-cd",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "Change directories with shortcut names.",
   "main": "index.cmd",
   "scripts": {
