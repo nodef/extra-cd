@@ -1,23 +1,20 @@
 Change to directories with shortcut names.
 
-
-## install
-
 ```bash
+# install
 $ npm install -g extra-cd
+
+# linux:
+# a new terminal is necessary
+# to use after installing.
 ```
 
-
-## usage
-
 ```bash
-$ ecd [- | [+<shortcut> [path] | -<shortcut> | =<shortcut>]]
-
+$ ecd [-] | +/-/=<shortcut> [path]
 # [] -> optional argument
 # <> -> argument value
-```
 
-```bash
+
 # change to workspace directory
 $ ecd /local/mnt/workspace
 
