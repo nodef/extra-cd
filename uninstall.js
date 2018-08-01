@@ -1,10 +1,14 @@
-var cp = require('child_process');
-var os = require('os');
+const fs = require('fs');
+const os = require('os');
 
-const LBASH = '$HOME/.nodef/.bashrc';
-const LTEMP = '$HOME/.nodef/.bashrc-temp';
-const LPATTERN = `source ${process.cwd()}/index.cmd`;
-if(os.EOL==='\n') cp.execSync(
-  `grep -v "${LPATTERN}" ${LBASH} > ${LTEMP} && `+
-  `mv ${LTEMP} ${LBASH}`
-);
+
+// I. global variables
+const E = process.env;
+const LBASH = `${E['HOME']}/.nodef/.bashrc`;
+const LPATTERN = `source ${process.cwd()}/index.cmd\n`;
+
+if(os.EOL==='\n') {
+  if(!fs.existsSync(LBASH)) return;
+  var lbash = fs.readFileSync(LBASH, 'utf8');
+  fs.writeFileSync(LBASH, lbash.replace(LPATTERN, ''));
+}
