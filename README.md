@@ -52,3 +52,6 @@ $ ecd =up3
 # remove relative path shortcut
 $ ecd -up3
 ```
+
+
+[![extra-cd](https://i.imgur.com/U2wz5PJ.jpg)](https://merferry.github.io)
