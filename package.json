@@ -1,9 +1,10 @@
 {
   "name": "extra-cd",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Change directories with shortcut names.",
   "main": "index.cmd",
   "scripts": {
+    "install": "node install",
     "test": "exit"
   },
   "repository": {
