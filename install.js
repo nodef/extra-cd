@@ -4,7 +4,7 @@ var os = require('os');
 const GBASH = '$HOME/.bashrc';
 const LBASH = '$HOME/.nodef/.bashrc';
 const GPATTERN = 'source $HOME/.nodef/.bashrc';
-const LPATTERN = 'source $PWD/index.cmd';
+const LPATTERN = `source ${process.cwd()}/index.cmd`;
 if(os.EOL==='\n') cp.execSync(
   `tr -d '\r' <index.sh >index.cmd && `+
   'chmod +x index.cmd && rm index.sh && '+
