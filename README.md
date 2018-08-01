@@ -1,4 +1,5 @@
-Change to directories with shortcut names.
+Change to directories with listing.
+> You can use shortcuts too!
 
 ```bash
 # install

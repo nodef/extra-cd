@@ -1,7 +1,7 @@
 {
   "name": "extra-cd",
-  "version": "0.0.10",
-  "description": "Change directories with shortcut names.",
+  "version": "0.0.11",
+  "description": "Change directories with listing.",
   "main": "index.cmd",
   "scripts": {
     "install": "node install",
@@ -18,6 +18,8 @@
   "keywords": [
     "extra",
     "cd",
+    "change",
+    "directory",
     "cli",
     "command",
     "line",
