@@ -3,6 +3,6 @@ var os = require('os');
 
 if(os.EOL==='\n') cp.execSync(
   `tr -d '\r' <index.sh >index.cmd && `+
-  'chmod +x index.cmd && rm index.sh && '+
+  'chmod +x index.cmd && rm index.sh && npm unlink && '+
   'echo "source $PWD/index.cmd" >> $HOME/.bashrc'
 );
