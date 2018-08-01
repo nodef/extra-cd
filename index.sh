@@ -1,5 +1,5 @@
 #!/bin/bash
-function ocd() {
+function ecd() {
 
 # prepare
 local d="${HOME}/.config/nodef/extra-cd"
