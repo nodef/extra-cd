@@ -1,0 +1,29 @@
+{
+  "name": "extra-cd",
+  "version": "0.0.1",
+  "description": "Change directories with shortcut names.",
+  "main": "index.cmd",
+  "scripts": {
+    "test": "exit"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nodef/extra-cd.git"
+  },
+  "keywords": [
+    "extra",
+    "cd",
+    "cli",
+    "command",
+    "line",
+    "interface",
+    "console",
+    "application"
+  ],
+  "author": "wolfram77@gmail.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nodef/extra-cd/issues"
+  },
+  "homepage": "https://github.com/nodef/extra-cd#readme"
+}
