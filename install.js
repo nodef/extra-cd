@@ -8,7 +8,7 @@ const LPATTERN = 'source $PWD/index.cmd';
 if(os.EOL==='\n') cp.execSync(
   `tr -d '\r' <index.sh >index.cmd && `+
   'chmod +x index.cmd && rm index.sh && '+
-  `mkdir -p "$HOME/.nodef" && touch ${LBASH}`+
+  `mkdir -p "$HOME/.nodef" && touch ${LBASH} && `+
   `grep -q -F '${GPATTERN}' ${GBASH} || echo '${GPATTERN}' >> ${GBASH} && `+
   `grep -q -F '${LPATTERN}' ${LBASH} || echo '${LPATTERN}' >> ${LBASH}`
 );
