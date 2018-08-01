@@ -5,6 +5,9 @@ Change to directories with listing.
 # install
 $ npm install -g extra-cd
 
+# windows:
+# ready to use.
+
 # linux:
 # a new terminal is necessary
 # to use after installing.
