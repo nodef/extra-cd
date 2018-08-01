@@ -12,7 +12,7 @@ $ echo "source <path to ocd.sh>" >> ~/.bashrc
 ## usage
 
 ```bash
-$ ocd [- | [+<shortcut> [path] | -<shortcut> | =<shortcut>]]
+$ ecd [- | [+<shortcut> [path] | -<shortcut> | =<shortcut>]]
 
 # [] -> optional argument
 # <> -> argument value
@@ -20,35 +20,35 @@ $ ocd [- | [+<shortcut> [path] | -<shortcut> | =<shortcut>]]
 
 ```bash
 # change to workspace directory
-$ ocd /local/mnt/workspace
+$ ecd /local/mnt/workspace
 
 # change to up one directory
-$ ocd ..
+$ ecd ..
 
 # stay at current directory (list contents)
-$ ocd .
+$ ecd .
 
 # change to previous directory
-$ ocd -
+$ ecd -
 
 # add current directory as shortcut
-$ ocd +work
+$ ecd +work
 
 # change to root directory
-$ ocd /
+$ ecd /
 
 # change to workspace directory using shortcut
-$ ocd =work
+$ ecd =work
 
 # remove workspace shortcut
-$ ocd -work
+$ ecd -work
 
 # add relative path shortcut
-$ ocd +up3 ../../..
+$ ecd +up3 ../../..
 
 # go up 3 directories
-$ ocd =up3
+$ ecd =up3
 
 # remove relative path shortcut
-$ ocd -up3
+$ ecd -up3
 ```
