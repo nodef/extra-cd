@@ -1,6 +1,6 @@
 {
   "name": "extra-cd",
-  "version": "0.0.15",
+  "version": "0.0.16",
   "description": "Change directories with listing.",
   "main": "index.cmd",
   "scripts": {
