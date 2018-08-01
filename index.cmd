@@ -22,7 +22,7 @@ if "%i%"=="" goto :lend
 if "%i%"=="-" endlocal & popd & goto :lls
 if "%i%"=="." endlocal & pushd . & goto :lls
 if "%c%"=="+" echo %v% > "%f%" & goto :lend
-if "%c%"=="-" del "%f%" & goto :lls
+if "%c%"=="-" del "%f%" & goto :lend
 if "%c%"=="=" for /f "delims=" %%a in ('type "%f%" 2^>NUL') do endlocal & pushd "%%~a" & goto :lls
 endlocal & pushd "%i%"
 goto :lls
