@@ -11,7 +11,7 @@ $ npm install -g extra-cd
 ```
 
 ```bash
-$ ecd [-] | +/-/=<shortcut> [path]
+$ ecd [-] [+/-/=<shortcut>] [path]
 # [] -> optional argument
 # <> -> argument value
 
