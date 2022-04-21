@@ -1,16 +1,17 @@
-Change to directories with listing.
-> You can use shortcuts too!
+Change the working directory, with shortcuts and listing.<br>
+🐚 [Shell](https://www.npmjs.com/package/extra-cd.sh),
+🖥️ [Command prompt](https://www.npmjs.com/package/extra-cd.cmd),
+📜 [Files](https://unpkg.com/extra-cd.sh/).
+
+> Stability: [Experimental](https://www.youtube.com/watch?v=L1j93RnIxEo).
 
 ```bash
-# install
-$ npm install -g extra-cd
+# Install on Linux
+$ npm install -g extra-cd.sh
+$ source $(where extra-cd)
 
-# windows:
-# ready to use.
-
-# linux:
-# a new terminal is necessary
-# to use after installing.
+# Install on Windows
+$ npm install -g extra-cd.cmd
 ```
 
 ```bash
@@ -19,37 +20,37 @@ $ ecd [-] [+/-/=<shortcut>] [path]
 # <> -> argument value
 
 
-# change to workspace directory
+# Change to workspace directory
 $ ecd /local/mnt/workspace
 
-# change to up one directory
+# Change to up one directory
 $ ecd ..
 
-# stay at current directory (list contents)
+# Stay at current directory (list contents)
 $ ecd .
 
-# change to previous directory
+# Change to previous directory
 $ ecd -
 
-# add current directory as shortcut
+# Add current directory as shortcut
 $ ecd +work
 
-# change to root directory
+# Change to root directory
 $ ecd /
 
-# change to workspace directory using shortcut
+# Change to workspace directory using shortcut
 $ ecd =work
 
-# remove workspace shortcut
+# Remove workspace shortcut
 $ ecd -work
 
-# add relative path shortcut
+# Add relative path shortcut
 $ ecd +up3 ../../..
 
-# go up 3 directories
+# Go up 3 directories
 $ ecd =up3
 
-# remove relative path shortcut
+# Remove relative path shortcut
 $ ecd -up3
 ```
 
