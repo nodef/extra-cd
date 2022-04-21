@@ -1,7 +1,5 @@
-const os = require('os');
-const {child_process: cp, fs, path} = require('extra-build');
-const {git, github, package}        = require('extra-build');
-const {javascript, jsdoc, markdown} = require('extra-build');
+const {fs} = require('extra-build');
+const {github, package} = require('extra-build');
 
 const owner  = 'nodef';
 
@@ -12,6 +10,7 @@ const owner  = 'nodef';
 function updateGithub() {
   var m = package.read('.');
   var {name, description} = m;
+  var name      = name.replace(/\..+/, '');
   var homepage  = `https://www.npmjs.com/package/${name}.sh`;
   var topics    = m.keywords;
   github.updateDetails(owner, name, {description, homepage, topics});
@@ -40,7 +39,7 @@ function publishBin(sym, ver) {
     package.write('.', m);
     fs.restoreFileSync('.npmignore', () => {
       var ignore = fs.readFileTextSync('.npmignore');
-      ignore += 'index.cmd\n';
+      ignore += 'index.sh\n';
       fs.writeFileTextSync('.npmignore', ignore);
       fs.restoreFileSync('README.md', () => {
         var txt = fs.readFileTextSync('README.md');

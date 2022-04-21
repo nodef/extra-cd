@@ -5,6 +5,8 @@ Change the working directory, with shortcuts and listing.<br>
 
 > Stability: [Experimental](https://www.youtube.com/watch?v=L1j93RnIxEo).
 
+<br>
+
 ```bash
 # Install on Linux
 $ npm install -g extra-cd.sh
@@ -13,6 +15,8 @@ $ source $(where extra-cd)
 # Install on Windows
 $ npm install -g extra-cd.cmd
 ```
+
+<br>
 
 ```bash
 $ ecd [-] [+/-/=<shortcut>] [path]
@@ -54,5 +58,7 @@ $ ecd =up3
 $ ecd -up3
 ```
 
+<br>
+<br>
 
-[![extra-cd](https://i.imgur.com/U2wz5PJ.jpg)](https://merferry.github.io)
+[![](https://img.youtube.com/vi/aZ1Zp3gNcEI/maxresdefault.jpg)](https://www.youtube.com/watch?v=aZ1Zp3gNcEI)
