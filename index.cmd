@@ -20,12 +20,12 @@ if not "%~2"=="" set v=%2
 :: Options
 if "%i%"=="--help" more %~dp0README.md & goto :eof
 if "%i%"==""  goto :eof
-if "%i%"=="-" endlocal & popd    & goto :list
-if "%i%"=="." endlocal & pushd . & goto :list
+if "%i%"=="-" endlocal & endlocal & popd    & goto :list
+if "%i%"=="." endlocal & endlocal & pushd . & goto :list
 if "%c%"=="+" echo %v% > "%f%"   & goto :eof
 if "%c%"=="-" del "%f%"          & goto :eof
-if "%c%"=="=" for /f "delims=" %%a in ('type "%f%" 2^>NUL') do endlocal & pushd "%%~a" & goto :list
-endlocal & pushd "%i%"
+if "%c%"=="=" for /f "delims=" %%a in ('type "%f%" 2^>NUL') do endlocal & endlocal & pushd "%%~a" & goto :list
+endlocal & endlocal & pushd "%i%"
 goto :list
 
 :: List directory

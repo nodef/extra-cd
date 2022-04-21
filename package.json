@@ -1,6 +1,6 @@
 {
   "name": "extra-cd.sh",
-  "version": "1.1.3",
+  "version": "1.1.4",
   "description": "Change the working directory, with shortcuts and listing.",
   "preferGlobal": true,
   "main": "index.sh",
