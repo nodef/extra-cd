@@ -2,34 +2,35 @@
 setlocal enabledelayedexpansion
 
 :: prepare
-set d=%APPDATA%\0rez\ocd
+set d=%USERPROFILE%\.config\npm\extra-cd
 if not exist %d% mkdir %d%
-:: get arg0
+:: Get arg0
 set a="%*"
 if not "%a:~1,1%"=="=" set a="%1"
-:: remove quotes
+:: Remove quotes
 set b=%a:~1,-1%
 set i=%b:"=%
-:: get command and file name
+:: Get command and file name
 set c=%i:~0,1%
 set f=%d%\%i:~1%.ini
-:: get optional value
+:: Get optional value
 set v=%cd%
 if not "%~2"=="" set v=%2
 
-:: options
-if "%i%"=="" goto :lend
-if "%i%"=="-" endlocal & popd & goto :lls
-if "%i%"=="." endlocal & pushd . & goto :lls
-if "%c%"=="+" echo %v% > "%f%" & goto :lend
-if "%c%"=="-" del "%f%" & goto :lend
-if "%c%"=="=" for /f "delims=" %%a in ('type "%f%" 2^>NUL') do endlocal & pushd "%%~a" & goto :lls
+:: Options
+if "%i%"=="--help" more %~dp0README.md & goto :eof
+if "%i%"==""  goto :eof
+if "%i%"=="-" endlocal & popd    & goto :list
+if "%i%"=="." endlocal & pushd . & goto :list
+if "%c%"=="+" echo %v% > "%f%"   & goto :eof
+if "%c%"=="-" del "%f%"          & goto :eof
+if "%c%"=="=" for /f "delims=" %%a in ('type "%f%" 2^>NUL') do endlocal & pushd "%%~a" & goto :list
 endlocal & pushd "%i%"
-goto :lls
+goto :list
 
-:: list directory
-:lls
-ls --color --group-directories-first
+:: List directory
+:list
+dir
 echo.
 
-:lend
+:eof
