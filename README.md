@@ -10,7 +10,7 @@ Change the working directory, with shortcuts and listing.<br>
 ```bash
 # Install on Linux
 $ npm install -g extra-cd.sh
-$ source $(where extra-cd)
+$ source "$(which extra-cd)"
 
 # Install on Windows
 $ npm install -g extra-cd.cmd
