@@ -61,4 +61,13 @@ $ ecd -up3
 <br>
 <br>
 
+
+## References:
+
+- [cd (command)](https://en.wikipedia.org/wiki/Cd_(command))
+
+<br>
+<br>
+
+
 [![](https://img.youtube.com/vi/aZ1Zp3gNcEI/maxresdefault.jpg)](https://www.youtube.com/watch?v=aZ1Zp3gNcEI)
