@@ -3,7 +3,17 @@ Change the working directory, with shortcuts and listing.<br>
 🖥️ [Command prompt](https://www.npmjs.com/package/extra-cd.cmd),
 📜 [Files](https://unpkg.com/extra-cd.sh/).
 
+The [cd] (or `chdir`) is a [builtin shell command] to *change* the *current*
+*working directory* of the *shell*. This package provides a **user-friendly**
+**version** of the `cd` command, called `ecd`. It **lists the contents** of a
+directory upon changing directory, and also provides the ability to **save**
+**absolute and relative shortcuts**. Please check the examples below.
+
 > Stability: [Experimental](https://www.youtube.com/watch?v=L1j93RnIxEo).
+
+[cd]: https://en.wikipedia.org/wiki/Cd_(command)
+[builtin shell command]: https://en.wikipedia.org/wiki/Shell_builtin
+
 
 <br>
 
