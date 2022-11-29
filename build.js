@@ -1,74 +1,63 @@
-const {fs} = require('extra-build');
-const {github, package} = require('extra-build');
+const build = require('extra-build');
 
 const owner  = 'nodef';
+const repo   = build.readMetadata('.').name.replace(/\..*/, '');
 
 
-
-
-// Update GitHub details.
-function updateGithub() {
-  var m = package.read('.');
-  var {name, description} = m;
-  var name      = name.replace(/\..+/, '');
-  var homepage  = `https://www.npmjs.com/package/${name}.sh`;
-  var topics    = m.keywords;
-  github.updateDetails(owner, name, {description, homepage, topics});
+// Publish root package to NPM, GitHub.
+function publishRootPackage(ds, ver, typ) {
+  var _package = build.readDocument('package.json');
+  var m = build.readMetadata('.');
+  m.version  = ver;
+  m.keywords = [...new Set([...m.keywords, 'shell', 'bash'])];
+  build.writeMetadata('.', m);
+  var _npmignore = build.readDocument('.npmignore');
+  var ignore     = build.readFileText('.npmignore');
+  ignore += 'index.cmd\n';
+  build.writeFileText('.npmignore', ignore);
+  build.publish('.');
+  try { build.publishGithub(',', owner); }
+  catch {}
+  build.writeDocument(_npmignore);
+  m.name     = m.name.replace(/\.sh$/, '.cmd');
+  m.version  = ver;
+  m.keywords = [...new Set([...m.keywords, 'windows', 'console'])];
+  m.main = 'index.cmd';
+  m.bin  = {'extra-cd': 'index.cmd', 'ecd': 'index.cmd'};
+  build.writeMetadata('.', m);
+  var _npmignore = build.readDocument('.npmignore');
+  var ignore     = build.readFileText('.npmignore');
+  ignore += 'index.sh\n';
+  build.writeFileText('.npmignore', ignore);
+  var _readme = build.readDocument('README.md');
+  var txt     = build.readFileText('README.md');
+  txt = txt.replace('https://unpkg.com/extra-cd.sh/', 'https://unpkg.com/extra-cd.cmd/');
+  build.writeFileText('README.md', txt);
+  build.publish('.');
+  try { build.publishGithub('.', owner); }
+  catch {}
+  build.writeDocument(_readme);
+  build.writeDocument(_npmignore);
+  build.writeDocument(_package);
 }
 
 
-// Publish bin package to NPM, GitHub.
-function publishBin(sym, ver) {
-  fs.restoreFileSync('package.json', () => {
-    var m = package.read();
-    m.version  = ver;
-    m.keywords = [...new Set([...m.keywords, 'shell', 'bash'])];
-    package.write('.', m);
-    fs.restoreFileSync('.npmignore', () => {
-      var ignore = fs.readFileTextSync('.npmignore');
-      ignore += 'index.cmd\n';
-      fs.writeFileTextSync('.npmignore', ignore);
-      package.publish('.');
-      package.publishGithub('.', owner);
-    });
-    m.name     = m.name.replace(/\.sh$/, '.cmd');
-    m.version  = ver;
-    m.keywords = [...new Set([...m.keywords, 'windows', 'console'])];
-    m.main = 'index.cmd';
-    m.bin  = {'extra-cd': 'index.cmd', 'ecd': 'index.cmd'};
-    package.write('.', m);
-    fs.restoreFileSync('.npmignore', () => {
-      var ignore = fs.readFileTextSync('.npmignore');
-      ignore += 'index.sh\n';
-      fs.writeFileTextSync('.npmignore', ignore);
-      fs.restoreFileSync('README.md', () => {
-        var txt = fs.readFileTextSync('README.md');
-        txt = txt.replace('https://unpkg.com/extra-cd.sh/', 'https://unpkg.com/extra-cd.cmd/');
-        fs.writeFileTextSync('README.md', txt);
-        package.publish('.');
-        package.publishGithub('.', owner);
-      });
-    });
-  });
+// Publish root package to NPM, GitHub.
+function publishRootPackages(ds, ver) {
+  publishRootPackage(ds, ver, '');
 }
 
 
-// Deploy root package to NPM, GitHub.
-function deployRoot(ver) {
-  publishBin('', ver);
-}
-
-
-// Deploy root, sub packages to NPM, GitHub.
-function deployAll() {
-  var m   = package.read();
-  var ver = package.nextUnpublishedVersion(m.name, m.version);
-  updateGithub();
-  deployRoot(ver);
+// Publish root, sub packages to NPM, GitHub.
+function publishPackages(ds) {
+  var m   = build.readMetadata('.');
+  var ver = build.nextUnpublishedVersion(m.name, m.version);
+  build.updateGithubRepoDetails({owner, repo, topics: m.keywords});
+  publishRootPackages(ds, ver);
 }
 
 
 function main(a) {
-  if (a[2] === 'deploy') deployAll();
+  if (a[2] === 'publish-packages') publishPackages([]);
 }
 main(process.argv);
