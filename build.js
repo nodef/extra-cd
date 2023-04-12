@@ -16,7 +16,7 @@ function publishRootPackage(ds, ver, typ) {
   ignore += 'index.cmd\n';
   build.writeFileText('.npmignore', ignore);
   build.publish('.');
-  try { build.publishGithub(',', owner); }
+  try { build.publishGithub('.', owner); }
   catch {}
   build.writeDocument(_npmignore);
   m.name     = m.name.replace(/\.sh$/, '.cmd');

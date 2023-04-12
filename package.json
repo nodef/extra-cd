@@ -1,6 +1,6 @@
 {
   "name": "extra-cd.sh",
-  "version": "1.1.10",
+  "version": "1.1.11",
   "description": "Change the working directory, with shortcuts and listing.",
   "preferGlobal": true,
   "main": "index.sh",
@@ -34,6 +34,6 @@
   },
   "homepage": "https://github.com/nodef/extra-cd#readme",
   "devDependencies": {
-    "extra-build": "^2.2.39"
+    "extra-build": "^2.2.42"
   }
 }
