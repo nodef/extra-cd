@@ -42,6 +42,9 @@ fi
 
 
 # Change the working directory, with shortcuts and listing.
+xcd() {
+extra-cd "$@"
+}
 ecd() {
 extra-cd "$@"
 }

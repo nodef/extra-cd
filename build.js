@@ -1,63 +1,84 @@
-const build = require('extra-build');
+const fs = require('fs');
+const os = require('os');
+const cp = require('child_process');
 
-const owner  = 'nodef';
-const repo   = build.readMetadata('.').name.replace(/\..*/, '');
+
+// Read a text file.
+function readTextFile(pth) {
+  const txt = fs.readFileSync(pth, 'utf8');
+  return txt.replace(/\r\n|\r/g, '\n');
+}
 
 
-// Publish root package to NPM, GitHub.
-function publishRootPackage(ds, ver, typ) {
-  var _package = build.readDocument('package.json');
-  var m = build.readMetadata('.');
-  m.version  = ver;
+// Write a text file.
+function writeTextFile(pth, txt) {
+  txt = txt.replace(/\r\n|\r|\n/g, os.EOL);
+  fs.writeFileSync(pth, txt, 'utf8');
+}
+
+
+// Read a JSON file.
+function readJsonFile(pth) {
+  const txt = readTextFile(pth);
+  return JSON.parse(txt);
+}
+
+
+// Write a JSON file.
+function writeJsonFile(pth, obj) {
+  const txt = JSON.stringify(obj, null, 2) + '\n';
+  writeTextFile(pth, txt);
+}
+
+
+// Run a command line.
+function runCommand(cmd) {
+  cp.execSync(cmd, {stdio: 'inherit'});
+}
+
+
+// Restore original files.
+function restoreFiles(_package, _npmignore, _readme) {
+  writeTextFile('package.json', _package);
+  writeTextFile('.npmignore',   _npmignore);
+  writeTextFile('README.md',    _readme);
+}
+
+
+// Publish packages to NPM.
+function publishPackages() {
+  // Snapshot original files.
+  const _package   = readTextFile('package.json');
+  const _npmignore = readTextFile('.npmignore');
+  const _readme    = readTextFile('README.md');
+  // Publish bash package to NPM.
+  let m = JSON.parse(_package);
   m.keywords = [...new Set([...m.keywords, 'shell', 'bash'])];
-  build.writeMetadata('.', m);
-  var _npmignore = build.readDocument('.npmignore');
-  var ignore     = build.readFileText('.npmignore');
+  writeJsonFile('package.json', m);
+  let ignore = _npmignore;
   ignore += 'index.cmd\n';
-  build.writeFileText('.npmignore', ignore);
-  build.publish('.');
-  try { build.publishGithub('.', owner); }
-  catch {}
-  build.writeDocument(_npmignore);
+  writeTextFile('.npmignore', ignore);
+  runCommand('npm publish --access public');
+  restoreFiles(_package, _npmignore, _readme);
+  // Publish Windows package to NPM.
+  m = JSON.parse(_package);
   m.name     = m.name.replace(/\.sh$/, '.cmd');
-  m.version  = ver;
   m.keywords = [...new Set([...m.keywords, 'windows', 'console'])];
   m.main = 'index.cmd';
-  m.bin  = {'extra-cd': 'index.cmd', 'ecd': 'index.cmd'};
-  build.writeMetadata('.', m);
-  var _npmignore = build.readDocument('.npmignore');
-  var ignore     = build.readFileText('.npmignore');
+  m.bin  = {'extra-cd': 'index.cmd', 'xcd': 'index.cmd', 'ecd': 'index.cmd'};
+  writeJsonFile('package.json', m);
+  ignore = _npmignore;
   ignore += 'index.sh\n';
-  build.writeFileText('.npmignore', ignore);
-  var _readme = build.readDocument('README.md');
-  var txt     = build.readFileText('README.md');
+  writeTextFile('.npmignore', ignore);
+  let txt = _readme;
   txt = txt.replace('https://unpkg.com/extra-cd.sh/', 'https://unpkg.com/extra-cd.cmd/');
-  build.writeFileText('README.md', txt);
-  build.publish('.');
-  try { build.publishGithub('.', owner); }
-  catch {}
-  build.writeDocument(_readme);
-  build.writeDocument(_npmignore);
-  build.writeDocument(_package);
-}
-
-
-// Publish root package to NPM, GitHub.
-function publishRootPackages(ds, ver) {
-  publishRootPackage(ds, ver, '');
-}
-
-
-// Publish root, sub packages to NPM, GitHub.
-function publishPackages(ds) {
-  var m   = build.readMetadata('.');
-  var ver = build.nextUnpublishedVersion(m.name, m.version);
-  build.updateGithubRepoDetails({owner, repo, topics: m.keywords});
-  publishRootPackages(ds, ver);
+  writeTextFile('README.md', txt);
+  runCommand('npm publish --access public');
+  restoreFiles(_package, _npmignore, _readme);
 }
 
 
 function main(a) {
-  if (a[2] === 'publish-packages') publishPackages([]);
+  if (a[2] === 'publish-packages') publishPackages();
 }
 main(process.argv);
